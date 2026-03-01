@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlacementPro</title>
+
+<style>
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#2B2D42,#1B263B);
+    color:white;
+    scroll-behavior:smooth;
+}
+
+/* NAVBAR */
+nav{
+    display:flex;
+    justify-content:space-between;
+    padding:20px 50px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(8px);
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:1000;
+}
+
+nav h2{color:#FFD166;margin:0;}
+
+nav a{
+    text-decoration:none;
+    color:#EDF2F4;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+nav a:hover{color:#EF233C;}
+
+/* SECTIONS */
+section{
+    padding:120px 40px;
+    min-height:100vh;
+}
+
+#intro{
+    text-align:center;
+    background:linear-gradient(135deg,#2B2D42,#8D99AE);
+}
+
+#intro h1{
+    font-size:48px;
+    background:linear-gradient(90deg,#EF233C,#FFD166);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:40px;
+    padding:15px 30px;
+    border-radius:30px;
+    background:#EF233C;
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.btn:hover{transform:scale(1.05);}
+
+/* ROADMAP */
+#roadmap{background:linear-gradient(135deg,#1B263B,#415A77);}
+
+.section-title{
+    text-align:center;
+    font-size:36px;
+    background:linear-gradient(90deg,#FF6B6B,#FFD166);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    margin-top:40px;
+}
+
+.card{
+    background:rgba(255,255,255,0.1);
+    padding:25px;
+    border-radius:15px;
+    transition:0.3s;
+}
+
+.card:hover{transform:translateY(-10px);}
+
+.feature-box{
+    margin:20px 0;
+    padding:20px;
+    background:rgba(255,255,255,0.1);
+    border-radius:12px;
+}
+
+/* QUERY BUTTON */
+.query-container{text-align:center;margin-top:50px;}
+
+.query-btn{
+    padding:15px 35px;
+    border-radius:30px;
+    border:none;
+    background:#EF233C;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* CHATBOT */
+.chatbot{
+    position:fixed;
+    bottom:-500px;
+    right:20px;
+    width:350px;
+    background:white;
+    color:black;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+    transition:0.5s ease;
+    overflow:hidden;
+}
+
+.chatbot.active{bottom:20px;}
+
+.chat-header{
+    background:#2B2D42;
+    color:white;
+    padding:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.chat-body{
+    height:280px;
+    overflow-y:auto;
+    padding:10px;
+    font-size:14px;
+}
+
+.chat-input{
+    display:flex;
+    border-top:1px solid #ccc;
+}
+
+.chat-input input{
+    flex:1;
+    padding:8px;
+    border:none;
+}
+
+.chat-input button{
+    padding:8px;
+    border:none;
+    background:#EF233C;
+    color:white;
+    cursor:pointer;
+}
+
+.user-msg{text-align:right;margin:5px 0;}
+.bot-msg{text-align:left;margin:5px 0;color:#EF233C;}
+.typing{font-style:italic;color:gray;}
+
+.clear-btn{
+    background:transparent;
+    border:none;
+    color:white;
+    cursor:pointer;
+}
+
+footer{text-align:center;padding:20px;background:rgba(0,0,0,0.3);}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <h2>PlacementPro</h2>
+    <div>
+        <a href="#intro">Home</a>
+        <a href="#roadmap">Roadmap</a>
+    </div>
+</nav>
+
+<section id="intro">
+    <h1>Empowering First Years for Placements</h1>
+    <p>Structured preparation platform with roadmap, coding help, resume builder, weekly planner & AI mock interviews.</p>
+    <a href="#roadmap" class="btn">Explore Roadmap ↓</a>
+</section>
+
+<section id="roadmap">
+<h1 class="section-title">4-Year Placement Roadmap</h1>
+
+<div class="container">
+<div class="card"><h3>1st Year</h3><p>Basics + Programming</p></div>
+<div class="card"><h3>2nd Year</h3><p>DSA + Projects</p></div>
+<div class="card"><h3>3rd Year</h3><p>Mock Interviews + Internships</p></div>
+<div class="card"><h3>4th Year</h3><p>Company Specific Prep</p></div>
+</div>
+
+<h1 class="section-title">App Features</h1>
+
+<div class="feature-box">💻 Coding Assistant</div>
+<div class="feature-box">📄 Resume Builder</div>
+<div class="feature-box">📅 Weekly Timetable Generator</div>
+<div class="feature-box">🎤 AI Mock Interviews</div>
+
+<div class="query-container">
+<button class="query-btn" onclick="toggleChat()">Ask AI Queries</button>
+</div>
+
+</section>
+
+<footer>© 2026 PlacementPro</footer>
+
+<!-- CHATBOT -->
+<div class="chatbot" id="chatbot">
+<div class="chat-header">
+<span>AI Assistant</span>
+<div>
+<button class="clear-btn" onclick="clearChat()">Clear</button>
+<button class="clear-btn" onclick="toggleChat()">✖</button>
+</div>
+</div>
+
+<div class="chat-body" id="chatBody"></div>
+
+<div class="chat-input">
+<input type="text" id="userInput" placeholder="Ask your query..." onkeypress="handleKey(event)">
+<button onclick="sendMessage()">Send</button>
+</div>
+</div>
+
+<script>
+
+const chatbot=document.getElementById("chatbot");
+const chatBody=document.getElementById("chatBody");
+
+function toggleChat(){
+    chatbot.classList.toggle("active");
+}
+
+function handleKey(e){
+    if(e.key==="Enter") sendMessage();
+}
+
+function sendMessage(){
+    const input=document.getElementById("userInput").value.trim();
+    if(input==="") return;
+
+    appendMessage("You",input,"user-msg");
+    document.getElementById("userInput").value="";
+
+    showTyping();
+
+    setTimeout(()=>{
+        removeTyping();
+        const reply=generateReply(input);
+        appendMessage("AI",reply,"bot-msg");
+        saveChat();
+    },1200);
+}
+
+function appendMessage(sender,text,className){
+    chatBody.innerHTML+=`<div class="${className}"><b>${sender}:</b> ${text}</div>`;
+    chatBody.scrollTop=chatBody.scrollHeight;
+}
+
+function showTyping(){
+    chatBody.innerHTML+=`<div class="typing" id="typing">AI is typing...</div>`;
+    chatBody.scrollTop=chatBody.scrollHeight;
+}
+
+function removeTyping(){
+    const typing=document.getElementById("typing");
+    if(typing) typing.remove();
+}
+
+function generateReply(input){
+    input=input.toLowerCase();
+    if(input.includes("roadmap")) return "Follow the 4-year roadmap step by step.";
+    if(input.includes("coding")) return "Practice DSA daily using Coding Assistant.";
+    if(input.includes("resume")) return "Resume Builder helps create ATS-friendly resumes.";
+    if(input.includes("mock")) return "AI Mock Interviews simulate real company interviews.";
+    if(input.includes("timetable")) return "Weekly Timetable helps manage your study plan.";
+    return "Stay consistent and focus on DSA, projects and communication skills.";
+}
+
+function saveChat(){
+    localStorage.setItem("chatHistory",chatBody.innerHTML);
+}
+
+function loadChat(){
+    const history=localStorage.getItem("chatHistory");
+    if(history) chatBody.innerHTML=history;
+    else appendMessage("AI","Hello! Ask me anything about placements 😊","bot-msg");
+}
+
+function clearChat(){
+    localStorage.removeItem("chatHistory");
+    chatBody.innerHTML="";
+    appendMessage("AI","Chat cleared. How can I help you?","bot-msg");
+}
+
+loadChat();
+
+</script>
+
+</body>
+</html>
